@@ -1,0 +1,42 @@
+class Player{
+    constructor(){
+        this.rank=null
+this.index=null
+this.x=0
+this.y=0
+
+    }
+    getRank(){
+        database.ref("rank").on("value",(data)=>{
+            this.rank=data.val()
+        })
+    }
+    updateRank(rank){
+    database.ref('/').update({
+    rank:rank
+})
+    }
+    getCount(){
+        database.ref('playerCount').on("value",function(data){
+            playerCount=data.val()
+        })
+    }
+    updateCount(count){
+        database.ref('/').update({
+            playerCount:count
+        })
+    }
+ update(){
+     var playerIndex="players/player"+this.index
+     database.ref(playerIndex).set({
+         x:this.x,
+         y:this.y
+     })
+ }
+ getPlayerInfo(){
+     database.ref("players").on("value",(data)=>{
+        allPlayers=data.val()
+        console.log(allPlayers)
+     })
+ }
+}
